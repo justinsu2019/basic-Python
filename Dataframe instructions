@@ -1,63 +1,72 @@
 import numpy as np
 import pandas as pd
 
+# Create series, series is one of the list in dataframe
 pop2014 = pd.Series([100,99,88,77,66],index=['python','java','C++','R','Ruby'])
 pop2015 = pd.Series([100,97,87,76,65],index=['python','java','C++','R','Ruby'])
 
+# to create DataFrame, we can do it this way:
 twoyears_data = pd.DataFrame({'2014':pop2014,'2015':pop2015})
 
-#print(twoyears_data)
-
+# print sorted twoyears_data by 2014
 print(twoyears_data.sort_values('2014',ascending=False),'\n')
 
+# print pure values out without indexes, the type is numpy.nparrag
 print('twoyears_data.values is \n',twoyears_data.values,'\n')
 
+# print indexes
 print('twoyears_data.index is \n',twoyears_data.index,'\n')
 
+# print columns name
 print('twoyears_data.columns is \n',twoyears_data.columns,'\n')
 
+# print columns value
 print('twoyears_data[''2014''] is \n',twoyears_data['2014'],'\n')
 
+# print rows out, with iloc, we can use numbers; with loc, we can only use columns names
 print('twoyears.iloc[0:2] is \n',twoyears_data.iloc[0:2],'\n')
-
 print('twoyears.loc[''python'':''C++''] is \n',twoyears_data.loc['python':'C++'],'\n')
 
+# add one more column name as avg to the original sheet
 twoyears_data['avg'] = 0.5*(twoyears_data['2014']+twoyears_data['2015'])
 
-print('twoyears.avg] is \n',twoyears_data,'\n')
+print('Add twoyears.avg and then it is \n',twoyears_data,'\n')
 
-
-
+# create a new dataframe with default index
 NBA = pd.DataFrame([{'name':'curry','age':'28','points':'32','turnover':3},
                     {'name':'thompson','age':'28','points':'30','turnover':2},
                     {'name':'Green','age':'27','points':'10','turnover':5},
                     {'name':'Durant','age':'28','points':'38','turnover':1}])
-
 print('NBA is \n',NBA,'\n')
 
-NBA_index = NBA.set_index('name')
+# set the index for the new dataframe
+NBA = NBA.set_index('name')
 
-print('NBA_index is \n',NBA_index,'\n')
+# print dataframe out
+print('NBA is \n',NBA,'\n')
 
-print('NBA_index Green is \n',NBA_index.loc['Green'],'\n')
-print('NBA_index Green is \n',NBA_index.iloc[2],'\n')
+# print a row out
+print('NBA Green is \n',NBA_index.loc['Green'],'\n')
+print('NBA Green is \n',NBA_index.iloc[2],'\n')
 
-print('NBA_index Green is age \n',NBA_index.loc['Green'][1],'\n')
-print('NBA_index Green is age \n',NBA_index.iloc[2][1],'\n')
-print('NBA_index Green is age \n',NBA_index['age']['Green'],'\n')
+# print specified value out
+print('NBA Green is age \n',NBA_index.loc['Green'][1],'\n')
+print('NBA Green is age \n',NBA_index.iloc[2][1],'\n')
+print('NBA Green is age \n',NBA_index['age']['Green'],'\n')
 
-
+# create a new table to join the 2 tables
 NBA_injury = pd.DataFrame([{'player':'curry','injury':0},
                     {'player':'thompson','injury':1},
                     {'player':'Green','injury':0},
                     {'player':'Durant','injury':1}])
 
+# merge / join the tables
 NBA_temp = pd.merge(NBA, NBA_injury, left_on="name", right_on="player")
 print(NBA_temp.set_index('player'))
 
 NBA_temp_1 = pd.merge(NBA, NBA_injury, left_on="name", right_on="player", how='right')
 print(NBA_temp_1.set_index('player'))
 
-
+# drop one column out of it
 NBA = pd.merge(NBA, NBA_injury, left_on="name", right_on="player").drop('name',axis=1)
 print(NBA.set_index('player'))
