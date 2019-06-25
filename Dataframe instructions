@@ -25,3 +25,39 @@ print('twoyears.loc[''python'':''C++''] is \n',twoyears_data.loc['python':'C++']
 twoyears_data['avg'] = 0.5*(twoyears_data['2014']+twoyears_data['2015'])
 
 print('twoyears.avg] is \n',twoyears_data,'\n')
+
+
+
+NBA = pd.DataFrame([{'name':'curry','age':'28','points':'32','turnover':3},
+                    {'name':'thompson','age':'28','points':'30','turnover':2},
+                    {'name':'Green','age':'27','points':'10','turnover':5},
+                    {'name':'Durant','age':'28','points':'38','turnover':1}])
+
+print('NBA is \n',NBA,'\n')
+
+NBA_index = NBA.set_index('name')
+
+print('NBA_index is \n',NBA_index,'\n')
+
+print('NBA_index Green is \n',NBA_index.loc['Green'],'\n')
+print('NBA_index Green is \n',NBA_index.iloc[2],'\n')
+
+print('NBA_index Green is age \n',NBA_index.loc['Green'][1],'\n')
+print('NBA_index Green is age \n',NBA_index.iloc[2][1],'\n')
+print('NBA_index Green is age \n',NBA_index['age']['Green'],'\n')
+
+
+NBA_injury = pd.DataFrame([{'player':'curry','injury':0},
+                    {'player':'thompson','injury':1},
+                    {'player':'Green','injury':0},
+                    {'player':'Durant','injury':1}])
+
+NBA_temp = pd.merge(NBA, NBA_injury, left_on="name", right_on="player")
+print(NBA_temp.set_index('player'))
+
+NBA_temp_1 = pd.merge(NBA, NBA_injury, left_on="name", right_on="player", how='right')
+print(NBA_temp_1.set_index('player'))
+
+
+NBA = pd.merge(NBA, NBA_injury, left_on="name", right_on="player").drop('name',axis=1)
+print(NBA.set_index('player'))
