@@ -1,0 +1,27 @@
+import numpy as np
+import pandas as pd
+
+pop2014 = pd.Series([100,99,88,77,66],index=['python','java','C++','R','Ruby'])
+pop2015 = pd.Series([100,97,87,76,65],index=['python','java','C++','R','Ruby'])
+
+twoyears_data = pd.DataFrame({'2014':pop2014,'2015':pop2015})
+
+#print(twoyears_data)
+
+print(twoyears_data.sort_values('2014',ascending=False),'\n')
+
+print('twoyears_data.values is \n',twoyears_data.values,'\n')
+
+print('twoyears_data.index is \n',twoyears_data.index,'\n')
+
+print('twoyears_data.columns is \n',twoyears_data.columns,'\n')
+
+print('twoyears_data[''2014''] is \n',twoyears_data['2014'],'\n')
+
+print('twoyears.iloc[0:2] is \n',twoyears_data.iloc[0:2],'\n')
+
+print('twoyears.loc[''python'':''C++''] is \n',twoyears_data.loc['python':'C++'],'\n')
+
+twoyears_data['avg'] = 0.5*(twoyears_data['2014']+twoyears_data['2015'])
+
+print('twoyears.avg] is \n',twoyears_data,'\n')
