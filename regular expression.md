@@ -146,8 +146,3 @@
      *
      */
     public static final String REGEX_INT_ARITHMETIC_NUMBER = "^[0-9]+(\\.[0-9]{1,3})?$";
---------------------- 
-作者：apple125414 
-来源：CSDN 
-原文：https://blog.csdn.net/apple125414/article/details/80167066 
-版权声明：本文为博主原创文章，转载请附上博文链接！
