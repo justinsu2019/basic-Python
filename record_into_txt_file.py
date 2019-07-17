@@ -1,0 +1,5 @@
+    f = open('result.txt','a')
+    f.write(str(phrase_need_manual_check))
+    f.write("\n")
+    f.write(str(phrase))
+    f.close()
